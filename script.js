@@ -31,11 +31,23 @@ async function loadByBreed(breed) {
 }
 
 function createShow(image){
-    console.log(image)
+    // console.log(image)
+  let counter = 0;
   document.getElementById("slideShow").innerHTML = `
-  
   <div class="slide" style="background-image : url('${image[0]}')">
   </div>
-   
   `
+  let interval = setInterval(nextSlide, 2000)
+  
+  function nextSlide() {
+document.getElementById("slideShow").insertAdjacentHTML("beforeend", `<div class="slide" style="background-image : url('${image[counter]}')"></div>`);
+    setTimeout(function() {
+      document.querySelector('.slide').remove();
+    }, 500)
+    if(counter + 1 >= image.length) {
+       counter = 0;
+    } else {
+      counter++;
+    }
+  }
 }
